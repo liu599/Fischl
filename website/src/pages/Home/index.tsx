@@ -20,7 +20,6 @@ const HomePage: FC = () => {
     }, [inputText]);
     const handleChange = (event) => {
         console.log(myFirstWasm);
-
         setInputText(event.target.value);
     };
 
