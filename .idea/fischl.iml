@@ -8,6 +8,8 @@
       <excludeFolder url="file://$MODULE_DIR$/.tmp" />
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/packages/mona/target" />
+      <excludeFolder url="file://$MODULE_DIR$/packages/mona/pkg" />
+      <excludeFolder url="file://$MODULE_DIR$/website/src/.umi" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
