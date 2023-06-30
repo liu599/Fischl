@@ -5,7 +5,7 @@ import { useModel } from '@umijs/max';
 import styles from './index.less';
 
 import { FC, useEffect, useRef, useState } from 'react';
-import * as myFirstWasm from '@/wasm/mona';
+import * as myFirstWasm from '@/wasm/pkg-mona';
 
 const HomePage: FC = () => {
     const { name } = useModel('global');
@@ -15,6 +15,8 @@ const HomePage: FC = () => {
         const timer = setTimeout(() => {
             let message = `${myFirstWasm.get_greeting(inputText)}`;
             setText(message);
+            myFirstWasm.call_command("123");
+            myFirstWasm.
         }, 100);
         return () => clearTimeout(timer);
     }, [inputText]);

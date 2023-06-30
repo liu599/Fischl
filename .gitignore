@@ -20,3 +20,5 @@
 /packages/**/bin/
 /packages/**/pkg/
 /packages/**/wasm-pack.log
+/packages/**/dist/
+/target/

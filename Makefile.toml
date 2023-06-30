@@ -1,0 +1,77 @@
+[tasks.format]
+install_crate = "rustfmt"
+command = "cargo"
+args = ["fmt", "--", "--emit=files"]
+
+[tasks.build]
+command = "cargo"
+args = ["build"]
+
+[tasks.test]
+command = "cargo"
+args = ["test"]
+
+[tasks.my-flow]
+dependencies = [
+    "format",
+    "build",
+    "test"
+]
+workspace = false
+
+[tasks.clean-all]
+script_runner = "@shell"
+script = '''
+rm -rf target
+rm -rf Cargo.lock
+rm -rf packages/wasm/pkg
+rm -rf website/dist
+rm -rf website/src/pkg
+'''
+workspace = false
+
+[tasks.build-wasm]
+script_runner = "@shell"
+script = '''
+cd packages/mona
+wasm-pack build --target web
+'''
+workspace = false
+
+[tasks.cp-wasm]
+script_runner = "@shell"
+script = '''
+rm -rf website/src/wasm/pkg-mona/
+mkdir website/src/wasm/pkg-mona/
+cp -r packages/mona/pkg website/src/wasm/pkg-mona/
+'''
+workspace = false
+dependencies = ["build-wasm"]
+
+ [tasks.npm-install]
+ script_runner = "@shell"
+ script = '''
+ cd website
+ npm install pnpm -g
+ pnpm i
+ '''
+ workspace = false
+ dependencies = ["cp-wasm"]
+
+#
+ [tasks.run-web]
+ script_runner = "@shell"
+ script = '''
+ cd website
+ npm run dev
+ '''
+ workspace = false
+ dependencies = ["cp-wasm"]
+#
+# [tasks.build-web]
+# script_runner = "@shell"
+# script = '''
+# cd website
+# npm run build
+# '''
+# workspace = false
